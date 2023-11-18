@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>com.microdevs</groupId>
-    <artifactId>user-service</artifactId>
+    <artifactId>auth-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>user-service</name>
-    <description>user-service</description>
+    <name>auth-service</name>
+    <description>auth-service</description>
 
     <developers>
         <developer>

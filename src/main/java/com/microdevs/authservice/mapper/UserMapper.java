@@ -1,30 +1,19 @@
 package com.microdevs.authservice.mapper;
 
-import com.microdevs.baseservice.enums.StatusType;
+import com.microdevs.authservice.dto.UserDto;
 import com.microdevs.authservice.entity.User;
-import com.microdevs.authservice.model.CreateUser;
-import com.microdevs.authservice.model.UpdateUser;
-import com.microdevs.authservice.model.dto.UserDto;
-import org.mapstruct.*;
-import org.mapstruct.factory.Mappers;
+import org.mapstruct.BeanMapping;
+import org.mapstruct.Mapper;
+import org.mapstruct.MappingTarget;
+import org.mapstruct.NullValuePropertyMappingStrategy;
 
-import java.util.List;
-
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UserMapper {
-    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
 
-    public User createToEntity(CreateUser createUser);
+    UserDto toDto(User entity);
 
-    public UserDto entityToDto(User user);
+    User toEntity(UserDto entity);
 
     @BeanMapping(nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
-    User updateToEntity(@MappingTarget User product, UpdateUser updateUser);
-
-    User dtoToEntity(UserDto userDto);
-
-    @Mapping(target = "status", source = "status")
-    User statusToEntity(@MappingTarget User user, StatusType status);
-
-    List<UserDto> entityListtoDtoList(List<User> userList);
+    void updatePartial(@MappingTarget User entity, UserDto dto);
 }

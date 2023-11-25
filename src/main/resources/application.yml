@@ -1,16 +1,19 @@
 spring:
   application:
-    name: user-service
+    name: auth-service
   datasource:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://localhost:5432/user_db
     username: postgres
-    password: ENC(wZKp2ZNhOxUDSUgrCmpRR+ddUUViGHGo)
+    password: postgres #ENC(u2w5r7jsreXcrKIdbuqI183na97Rx2Z1)
   jpa:
     show-sql: true
     properties:
       hibernate:
         format_sql: true
+    hibernate:
+      ddl-auto: create
+
 
 jasypt:
   encryptor:
@@ -18,7 +21,7 @@ jasypt:
     algorithm: PBEWithMD5AndTripleDES
 
 application:
-  title: User Service
+  title: Auth Service
   version: 1.0
 
 server:
@@ -28,3 +31,10 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://localhost:8761/eureka/
+    enabled: false
+
+jwt-variables:
+  EXPIRES_ACCESS_TOKEN_MINUTE: 999
+  EXPIRES_REFRESH_TOKEN_MINUTE: 1
+  ISSUER: dev
+  KEY: asdqwe123+K3Y

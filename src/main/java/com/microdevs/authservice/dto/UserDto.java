@@ -1,10 +1,11 @@
-package com.microdevs.authservice.model.dto;
+package com.microdevs.authservice.dto;
 
-import com.microdevs.baseservice.enums.StatusType;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.UUID;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -12,9 +13,11 @@ import lombok.Setter;
 @Setter
 public class UserDto {
     private Long id;
-    private String first_name;
-    private String last_name;
-    private String phone;
+    private String username;
     private String email;
-    private StatusType status;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String password;
+    private boolean isEnabled;
 }

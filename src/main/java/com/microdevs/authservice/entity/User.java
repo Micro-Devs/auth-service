@@ -1,13 +1,12 @@
 package com.microdevs.authservice.entity;
 
-import com.microdevs.baseservice.entity.BaseEntity;
-import com.microdevs.baseservice.enums.StatusType;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import javax.persistence.*;
+import java.util.Set;
 
 
 @Setter
@@ -15,17 +14,32 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "users", schema = "users")
-public class User extends BaseEntity {
+@Table(name = "USERS")
+public class User {
+
     @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @SequenceGenerator(sequenceName = "user_sequence", name = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String first_name;
-    private String last_name;
-    private String phone;
+
+    private String username;
+
+
     private String email;
-    @Enumerated(EnumType.STRING)
-    private StatusType status = StatusType.ACTIVE;
+
+    private String firstName;
+    private String lastName;
+    private String phone;
+
+
+    private String password;
+
+    private boolean isEnabled;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.MERGE)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Set<Role> roles;
 
 }
